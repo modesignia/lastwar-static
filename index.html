@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Last War Coach by WiS</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: linear-gradient(to right, #ffcc00, #ff5500);
+      padding: 1rem;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .card {
+      background: #2a2a2a;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #ff6600;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e65c00;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Last War Coach by WiS</h1>
+    <p>Tu guía táctica personalizada para Last War: Survival</p>
+  </header>
+  <div class="container">
+    <div class="card">
+      <h2>🎯 ¿Qué necesitas hoy?</h2>
+      <label for="need">Selecciona uno o más objetivos:</label>
+      <select id="need" multiple>
+        <option>Ganar en Desert Storm</option>
+        <option>Preparar Duel VS</option>
+        <option>Optimizar mi poder visible</option>
+        <option>Subir héroes o gear</option>
+        <option>Planificar upgrades</option>
+        <option>Conseguir más valor badges</option>
+        <option>Entender morale / firepower</option>
+        <option>Otro</option>
+      </select>
+      <label for="hq">🏗️ ¿Nivel de HQ?</label>
+      <input id="hq" type="number" min="1" max="40" placeholder="Ej: 35" />
+      <label for="heroes">🦸‍♂️ Héroes principales (nivel y estrellas):</label>
+      <textarea id="heroes" rows="4" placeholder="Ej: Kimberly 5⭐ 175, Tesla 4⭐ 170..."></textarea>
+      <label for="event">📅 ¿Evento activo hoy?</label>
+      <input id="event" type="text" placeholder="Ej: Desert Storm, Duel VS Día 3..." />
+      <button onclick="generatePlan()">Obtener estrategia</button>
+      <div id="output" class="card"></div>
+    </div>
+  </div>
+  <script>
+    async function generatePlan() {
+      const need = [...document.getElementById('need').selectedOptions].map(o => o.value).join(', ');
+      const hq = document.getElementById('hq').value;
+      const heroes = document.getElementById('heroes').value;
+      const event = document.getElementById('event').value;
+
+      const result = `
+        <h2>📋 Estrategia Recomendada</h2>
+        <p><strong>🎯 Objetivos:</strong> ${need}</p>
+        <p><strong>🏗️ Nivel HQ:</strong> ${hq}</p>
+        <p><strong>🦸‍♂️ Héroes:</strong> ${heroes}</p>
+        <p><strong>📅 Evento activo:</strong> ${event}</p>
+        <p><strong>📌 Consejo:</strong> Esta es una vista estática. Pronto se conectará al motor GPT-4o para generar estrategia en tiempo real.</p>
+      `;
+
+      document.getElementById("output").innerHTML = result;
+    }
+  </script>
+</body>
+</html>
